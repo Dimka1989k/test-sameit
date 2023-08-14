@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-// import { Nav } from "components/Nav/Nav";
 
 import { Suspense } from "react";
 import { Container } from "../../components/Container/Container.styled.jsx";

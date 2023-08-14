@@ -1,10 +1,14 @@
 import { Logo, ContainerApp } from "./App.styled.jsx";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { CheckingTTN } from "./pages/CheckingTTN/CheckingTTN.jsx";
-import { PostDepartment } from "./pages/PostDepartment/PostDepartment.jsx";
 import { Layout } from "./components/Layout/Layout";
+import { lazy } from "react";
 import { GlobalStyle } from "./GlobalStyles.js";
+
+const CheckingTTN = lazy(() => import("./pages/CheckingTTN/CheckingTTN.jsx"));
+const PostDepartment = lazy(() =>
+  import("./pages/PostDepartment/PostDepartment.jsx")
+);
 
 function App() {
   return (
