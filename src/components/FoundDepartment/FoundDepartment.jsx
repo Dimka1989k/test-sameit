@@ -1,5 +1,14 @@
 import { useState } from "react";
+
+import { nanoid } from "nanoid";
+import { useSelector } from "react-redux";
 import {
+  selectDepartmentsList,
+  selectDepartmentsError,
+} from "../../redux/selectors";
+import {
+  DepartmentNotFound,
+  TableWrapper,
   TableContainer,
   TheadContainer,
   StyledTh,
@@ -9,56 +18,85 @@ import {
   List,
   ListItem,
   StyledTdWork,
+  ButtonUp,
 } from "./FoundDepartment.styled.jsx";
+import { FaArrowUpLong } from "react-icons/fa6";
 
 import { IoCaretDownSharp } from "react-icons/io5";
 
 export const FoundDepartment = () => {
-  const [isOpen, setIsOpen] = useState(false); // Додали стан isOpen
+  const [isOpen, setIsOpen] = useState({});
 
-  const toggleIsOpen = () => {
-    setIsOpen(!isOpen);
+  const toggleIsOpen = (rowIndex) => {
+    setIsOpen((prevOpenRows) => ({
+      ...prevOpenRows,
+      [rowIndex]: !prevOpenRows[rowIndex],
+    }));
   };
 
-  const listItems = [
-    "Пн 08:00-21:00",
-    "Вт 08:00-21:00",
-    "Ср 08:00-21:00",
-    "Чт 08:00-21:00",
-    "Пт 08:00-21:00",
-    "Сб 09:00-19:00",
-    "Нд 09:00-19:00",
-  ];
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const listOfDepartments = useSelector(selectDepartmentsList);
+  const departmentsError = useSelector(selectDepartmentsError);
 
   return (
-    <TableContainer>
-      <TheadContainer>
-        <tr>
-          <StyledTh>Місто</StyledTh>
-          <StyledTh>Відділення №/Адреса</StyledTh>
-          <StyledTh>Роклад роботи</StyledTh>
-        </tr>
-      </TheadContainer>
-      <tbody>
-        <tr>
-          <StyledTd>Київ</StyledTd>
-          <StyledTd>Відділення №10: вул. Василя Жуковського, 22А</StyledTd>
-          <StyledTdWork>
-            <Wrapper isOpen={isOpen}>
-              <List>
-                {listItems
-                  .slice(0, isOpen ? listItems.length : 1)
-                  .map((item, index) => (
-                    <ListItem key={index}>{item}</ListItem>
-                  ))}
-              </List>
-              <ButtonDown isOpen={isOpen} onClick={toggleIsOpen}>
-                <IoCaretDownSharp style={{ color: "red" }} />
-              </ButtonDown>
-            </Wrapper>
-          </StyledTdWork>
-        </tr>
-      </tbody>
-    </TableContainer>
+    <TableWrapper>
+      {departmentsError ? (
+        <DepartmentNotFound>Такого міста немає у списку</DepartmentNotFound>
+      ) : (
+        <>
+          <TableContainer>
+            <TheadContainer>
+              <tr>
+                <StyledTh>Місто</StyledTh>
+                <StyledTh>Відділення №/Адреса</StyledTh>
+                <StyledTh>Роклад роботи</StyledTh>
+              </tr>
+            </TheadContainer>
+            <tbody key={nanoid()}>
+              {listOfDepartments.map((item, id) => (
+                <tr key={id}>
+                  <StyledTd>{item.CityDescription}</StyledTd>
+                  <StyledTd>{item.Description}</StyledTd>
+                  <StyledTdWork>
+                    <List>
+                      {isOpen[id] && (
+                        <li style={{ position: "relative" }}>
+                          <>
+                            <Wrapper isOpen={isOpen[id]}>
+                              <ListItem>Пн {item.Schedule.Monday}</ListItem>
+                              <ListItem>Вт {item.Schedule.Tuesday}</ListItem>
+                              <ListItem>Ср {item.Schedule.Wednesday}</ListItem>
+                              <ListItem>Чт {item.Schedule.Thursday}</ListItem>
+                              <ListItem>Пт {item.Schedule.Friday}</ListItem>
+                              <ListItem>Сб {item.Schedule.Saturday}</ListItem>
+                              <ListItem>Нд {item.Schedule.Sunday}</ListItem>
+                            </Wrapper>
+                          </>
+                        </li>
+                      )}
+                    </List>
+                    <ButtonDown
+                      isOpen={isOpen[id]}
+                      onClick={() => toggleIsOpen(id)}
+                    >
+                      <IoCaretDownSharp style={{ color: "red" }} />
+                    </ButtonDown>
+                  </StyledTdWork>
+                </tr>
+              ))}
+            </tbody>
+          </TableContainer>
+        </>
+      )}
+      <ButtonUp onClick={handleScrollToTop}>
+        <FaArrowUpLong />
+      </ButtonUp>
+    </TableWrapper>
   );
 };

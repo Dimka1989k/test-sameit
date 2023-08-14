@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-import { Form, Field } from "formik";
+import { device } from "../../utils/mixin";
+
+import { Form, Field, ErrorMessage } from "formik";
 
 export const FormContainer = styled(Form)`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  height: 160px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   background-color: #f1f1f1;
 `;
-
-export const InputContainer = styled.div``;
 
 export const Input = styled(Field)`
   font-size: 16px;
@@ -23,29 +25,47 @@ export const Input = styled(Field)`
   font-size: 18px;
   color: #808080;
   float: left;
-  width: 350px;
+
   outline: none;
   border-radius: 5px;
-  margin-right: 40px;
 
   ::placeholder {
+    padding-left: 10px;
   }
+
+  ${device.tablet} {
+    width: 350px;
+  }
+`;
+
+export const ContainerInput = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`
   font-size: 16px;
-  height: 45px;
-  width: 160px;
+
   border: none;
   background-color: #000;
   border-radius: 164.689px;
   color: #fff;
-  padding: 5px;
+  padding: 16px 36px;
   transition: background-color 0.5s ease-in;
   cursor: pointer;
+  margin-top: 20px;
 
   &:hover,
   &:focus {
     background-color: #ec1f2b;
   }
+`;
+
+export const ErrorMessageDepartment = styled(ErrorMessage)`
+  width: 280px;
+  text-align: start;
+  color: #ec1f2b;
+  font-weight: 400;
+  font-size: 10px;
+  margin-top: 4px;
 `;
