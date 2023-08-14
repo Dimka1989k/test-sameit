@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/test-sameit/static/js/main.0a8e4505.js",
+    "main.js": "/test-sameit/static/js/main.b8604181.js",
     "static/js/696.0586d5cc.chunk.js": "/test-sameit/static/js/696.0586d5cc.chunk.js",
     "static/js/391.0e16bd11.chunk.js": "/test-sameit/static/js/391.0e16bd11.chunk.js",
     "static/js/891.c1ba6506.chunk.js": "/test-sameit/static/js/891.c1ba6506.chunk.js",
     "static/js/746.995d0efc.chunk.js": "/test-sameit/static/js/746.995d0efc.chunk.js",
     "index.html": "/test-sameit/index.html",
-    "main.0a8e4505.js.map": "/test-sameit/static/js/main.0a8e4505.js.map",
+    "main.b8604181.js.map": "/test-sameit/static/js/main.b8604181.js.map",
     "696.0586d5cc.chunk.js.map": "/test-sameit/static/js/696.0586d5cc.chunk.js.map",
     "391.0e16bd11.chunk.js.map": "/test-sameit/static/js/391.0e16bd11.chunk.js.map",
     "891.c1ba6506.chunk.js.map": "/test-sameit/static/js/891.c1ba6506.chunk.js.map",
     "746.995d0efc.chunk.js.map": "/test-sameit/static/js/746.995d0efc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.0a8e4505.js"
+    "static/js/main.b8604181.js"
   ]
 }
