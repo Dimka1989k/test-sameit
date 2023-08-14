@@ -55,7 +55,22 @@ img {
   width: 100%;
 }
 
+::-webkit-scrollbar {
+	width: 12px;
+}
 
+::-webkit-scrollbar-track {
+	background: #f8f8f8;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #ec1f2b;
+	border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: red;
+}
 
 
 
